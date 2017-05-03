@@ -12,8 +12,8 @@ class MusicImporter
     files.map {|file| file.gsub("#{path}/", '')}
   end
 
-  # def import
-  #   files.each {|files| Song.new_by_filename(filename)}
-  # end
+  def import
+    files.each {|files| Song.new_from_filename(files)}
+  end
 
 end
