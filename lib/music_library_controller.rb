@@ -1,6 +1,5 @@
 class MusicLibraryController
 
-  extend Concerns::Findable
   attr_accessor :path
 
   def initialize(path = "./db/mp3s")
@@ -25,20 +24,20 @@ class MusicLibraryController
         song_choice = Song.all.sort_by{|s| s.artist.name }[input_number.to_i - 1]
         puts "Playing #{song_choice.artist.name} - #{song_choice.name} - #{song_choice.genre.name}"
 
-      when "list artist's songs"
+      when "list artist"
         puts "Which artist?"
         list_artists
         input_artist = gets.chomp
-        find_by_name(input_artist).songs.each do |artist|
-          puts "#{artist.name} - #{artist.song.name} - #{artist.genre}"
+        Artist.find_by_name(input_artist).songs.each do |song|
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
         end
-      when "list a genre's "
+      when "list genre"
         puts "Which genre?"
         list_genres
         input_genre = gets.chomp
-        find_by_name(input_genre).songs.each do |genre|
-          puts "#{genre.artist.name} - #{genre.song.name} - #{genre.name}"
-        end 
+        Genre.find_by_name(input_genre).songs.each do |song|
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        end
 
       when "exit"
         break
